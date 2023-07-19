@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=undefined
+Name=Muktart
+Encoding=UTF-8
+Comment=Simple application starter.
+Path=/usr/local/bin/muktart
+Exec=/usr/bin/muktart
+Terminal=false
+Type=Application
+Categories=Utily;
