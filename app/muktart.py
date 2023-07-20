@@ -26,6 +26,9 @@ username=getpass.getuser()
 en="/home/"+username+"/.by-mukonqi/muktart/en.txt"
 tr="/home/"+username+"/.by-mukonqi/muktart/tr.txt"
 
+global gfs
+gfs=0
+
 def settings():
     if not os.path.isfile("/home/"+username+"/.by-mukonqi/muktart/dark.txt") and not os.path.isfile("/home/"+username+"/.by-mukonqi/muktart/light.txt"):
         bg="#000000"
@@ -55,6 +58,8 @@ def settings():
         if os.path.isfile(tr):
             messagebox.showinfo("Bilgilendirme","Başarılı! Koyu tema uygulandı.")
         swindow.destroy()
+        if gfs == 0:
+            window.destroy()
         os.system("python3 /usr/bin/muktart")
     def light():
         os.system("cd /home/"+username+"/.by-mukonqi/muktart/ ; rm dark.txt ; touch light.txt")
@@ -63,16 +68,22 @@ def settings():
         if os.path.isfile(tr):
             messagebox.showinfo("Bilgilendirme","Başarılı! Açık tema uygulandı.")
         swindow.destroy()
+        if gfs == 0:
+            window.destroy()
         os.system("python3 /usr/bin/muktart")
     def langen():
         os.system("cd /home/"+username+"/.by-mukonqi/muktart/ ; rm tr.txt ; touch en.txt")
         messagebox.showinfo("Information","Successful! English language applied.")
         swindow.destroy()
+        if gfs == 0:
+            window.destroy()
         os.system("python3 /usr/bin/muktart")
     def langtr():
         os.system("cd /home/"+username+"/.by-mukonqi/muktart/ ; rm en.txt ; touch tr.txt")
         messagebox.showinfo("Bilgilendirme","Başarılı! Türkçe dili uygulandı.") 
         swindow.destroy()
+        if gfs == 0:
+            window.destroy()
         os.system("python3 /usr/bin/muktart")
     swindow=Tk()
     swindow.config(background=bg)
@@ -112,6 +123,8 @@ def settings():
     exit()
     
 def first_start():
+    global gfs
+    gfs=1
     bg="#000000"
     fg="#FFFFFF"
     button_bg="#FFFFFF"
@@ -171,6 +184,7 @@ elif os.path.isfile("/home/"+username+"/.by-mukonqi/muktart/light.txt"):
     a_button_bg="#FFFFFF"
     a_button_fg="#000000"
 else:
+    gfs=1
     if os.path.isfile(en):
         messagebox.showwarning("Warning","Can't found theme config. When you click 'OK' settings will open.")
     elif os.path.isfile(tr):
@@ -222,11 +236,8 @@ def run():
         text5.config(state=DISABLED)
         space5.pack()
         button2.pack()
-          
-    if os.path.isfile(en):
-        rtext3=Label(window, background=bg, foreground=fg, font="arial 10 bold", text="Status: Running, please wait.")
-    elif os.path.isfile(tr):
-        rtext3=Label(window, background=bg, foreground=fg, font="arial 10 bold", text="Durum: Çalışıyor, lütfen bekleyin.")
+    
+    rtext3=Label(window, background=bg, foreground=fg, font="arial 10 bold")
     rtext3.pack() 
     if passentry.get() == "Password (for sudo)" or passentry.get() == "Şifre (sudo için)" or passentry.get() == "":
         result = subprocess.Popen("awk '"+cmd+"' /usr/share/applications/"+appentry.get()+".desktop", shell=TRUE, stderr=subprocess.PIPE, stdout=subprocess.PIPE, stdin=subprocess.PIPE,universal_newlines=True)
@@ -251,6 +262,7 @@ space3=Label(window, background=bg, foreground=fg, text="\n", font="arial 3")
 space4=Label(window, background=bg, foreground=fg, text="\n", font="arial 3")
 space5=Label(window, background=bg, foreground=fg, text="\n", font="arial 3")
 space6=Label(window, background=bg, foreground=fg, text="\n", font="arial 7")
+space7=Label(window, background=bg, foreground=fg, text="\n", font="arial 1")
 
 apps = subprocess.Popen("cd /usr/share/applications ; ls *.desktop -1 | sed -e 's/\.desktop$//'", shell=TRUE, stderr=subprocess.PIPE, stdout=subprocess.PIPE, stdin=subprocess.PIPE,universal_newlines=True)
 (out, err)=apps.communicate() 
@@ -298,4 +310,5 @@ space5.pack()
 button1.pack()
 space6.pack()
 sobutton.pack()
+space7.pack()
 mainloop()
