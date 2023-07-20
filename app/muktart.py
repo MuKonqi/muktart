@@ -55,7 +55,7 @@ def settings():
         if os.path.isfile(tr):
             messagebox.showinfo("Bilgilendirme","Başarılı! Koyu tema uygulandı.")
         swindow.destroy()
-        os.system("python3 /usr/local/bin/muktart/muktart.py")
+        os.system("python3 /usr/bin/muktart")
     def light():
         os.system("cd /home/"+username+"/.by-mukonqi/muktart/ ; rm dark.txt ; touch light.txt")
         if os.path.isfile(en):
@@ -63,17 +63,17 @@ def settings():
         if os.path.isfile(tr):
             messagebox.showinfo("Bilgilendirme","Başarılı! Açık tema uygulandı.")
         swindow.destroy()
-        os.system("python3 /usr/local/bin/muktart/muktart.py")
+        os.system("python3 /usr/bin/muktart")
     def langen():
         os.system("cd /home/"+username+"/.by-mukonqi/muktart/ ; rm tr.txt ; touch en.txt")
         messagebox.showinfo("Information","Successful! English language applied.")
         swindow.destroy()
-        os.system("python3 /usr/local/bin/muktart/muktart.py")
+        os.system("python3 /usr/bin/muktart")
     def langtr():
         os.system("cd /home/"+username+"/.by-mukonqi/muktart/ ; rm en.txt ; touch tr.txt")
         messagebox.showinfo("Bilgilendirme","Başarılı! Türkçe dili uygulandı.") 
         swindow.destroy()
-        os.system("python3 /usr/local/bin/muktart/muktart.py")
+        os.system("python3 /usr/bin/muktart")
     swindow=Tk()
     swindow.config(background=bg)
     swindow.resizable(0, 0)
